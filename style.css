@@ -492,3 +492,92 @@ main{
     cursor: pointer;
     font: 600 14px 'Arial';
 }
+
+
+
+
+@media screen and (min-device-width: 280px) and (max-device-width: 768px) {
+
+    main {
+        padding: 16px;
+    }
+
+    header {
+        padding: 14px 16px;
+    }
+
+    .logo {
+        width: auto;
+        height: 26px;
+    }
+
+    .auth_buttons{
+        gap: 8px;
+    }
+
+    #loginButton, #signupButton {
+        padding: 9px 10px;
+    }
+
+    .modal_content {
+        width: 80%;
+    }
+
+    .container_01 {
+        padding: 40px 20px 0px 20px;
+    }
+
+    .search_heading {
+        font: 600 32px 'Arial';
+    }
+
+    .search_subHead {
+        font: 500 13px 'Arial';
+        margin-top: -10px;
+    }
+
+    .search_input_con {
+        width: 100%;
+    }
+
+    .C01_bannerImage {
+        width: 100%;
+        height: auto;
+    }
+
+    .trending_devies_container {
+        gap: 20px;
+    }
+
+    .trending_heading {
+        padding: 14px 14px;
+        gap: 6px;
+    }
+
+    #compareSection {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .product_details {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .listings_container {
+        width: 100%;
+        height: auto;
+        display: flex
+    ;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media screen and (min-device-width: 769px) and (max-device-width: 1280px) {
+
+    .search_input_con {
+        width: 50%;
+    }
+}
