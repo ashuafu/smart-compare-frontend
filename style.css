@@ -57,6 +57,7 @@ header{
 #loginButton{
     border: 1.5px solid var(--primary);
     color: var(--primary);
+    font-weight: 600;
 }
 
 #signupButton{
@@ -160,7 +161,8 @@ main{
     border: none;
     outline: none;
     border-radius: 100px;
-    padding: 12px;
+    padding: 20px;
+    border: 1px solid #3971fd;
 }
 
 .search_button{
@@ -474,7 +476,7 @@ main{
     border-radius: 6px;
     font: 500 16px 'Arial';
     border: none;
-    background-color: #0095FF;
+    background-color: var(--primary);
     color: #fff;
     cursor: pointer;
 }
@@ -486,7 +488,7 @@ main{
 }
 
 #switchToSignup, #switchToLogin{
-    color: #000000;
+    color: var(--primary);
     cursor: pointer;
     font: 600 14px 'Arial';
 }
