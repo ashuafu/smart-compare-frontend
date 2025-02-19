@@ -14,14 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search");
     const searchBtn = document.getElementById("searchBtn");
 
-    // ✅ Email & Password Validation Regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    const BASE_URL = "https://69e8-146-196-32-48.ngrok-free.app/api"; // Update this once backend is live
-    // const BASE_URL = "http://localhost:3001/api"; // Update this once backend is live
+    const BASE_URL = "https://997b-146-196-32-48.ngrok-free.app/api"; 
+    // const BASE_URL = "http://localhost:3001/api";
 
-    // ✅ Utility Functions
     function setCookie(name, value, days) {
         const expires = new Date();
         expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             signupButton.style.display = "none";
             userNameDisplay.innerText = `${username}`;
             userDisplay.style.display = "flex";
-            logoutButton.style.display = "none"; // Hide logout initially
+            logoutButton.style.display = "none";
         } else {
             loginButton.style.display = "inline";
             signupButton.style.display = "inline";
@@ -58,16 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    checkUserSession(); // Check user session on page load
+    checkUserSession();
 
-    // ✅ Toggle Signup Form
     switchToSignup.addEventListener("click", () => {
         loginForm.style.display = "none";
         signupForm.style.display = "flex";
         authTitle.innerText = "Sign Up";
     });
 
-    // ✅ Toggle Login Form
     switchToLogin.addEventListener("click", () => {
         signupForm.style.display = "none";
         loginForm.style.display = "flex";
@@ -86,36 +82,31 @@ document.addEventListener("DOMContentLoaded", function () {
         authTitle.innerText = "Sign Up";
     });
 
-    // ✅ Show Modal on Login or Signup Click
     [loginButton, signupButton].forEach((btn) => {
         btn.addEventListener("click", () => {
             authModal.style.display = "flex";
         });
     });
 
-    // ✅ Show Login Modal If User Is Not Authenticated (Search Click)
-    [searchInput, searchBtn].forEach((element) => {
-        element.addEventListener("click", () => {
-            if (!getCookie("isUserAuth")) {
-                loginForm.style.display = "flex";
-                signupForm.style.display = "none";
-                authTitle.innerText = "Login";
-                authModal.style.display = "flex";
-            }
-        });
-    });
+    // [searchInput, searchBtn].forEach((element) => {
+    //     element.addEventListener("click", () => {
+    //         if (!getCookie("isUserAuth")) {
+    //             loginForm.style.display = "flex";
+    //             signupForm.style.display = "none";
+    //             authTitle.innerText = "Login";
+    //             authModal.style.display = "flex";
+    //         }
+    //     });
+    // });
 
-    // ✅ Close Modal
     closeModal.addEventListener("click", () => {
         authModal.style.display = "none";
     });
 
-    // ✅ Toggle Logout Button When Clicking on Username
     userDisplay.addEventListener("click", () => {
         logoutButton.style.display = logoutButton.style.display === "inline" ? "none" : "inline";
     });
 
-    // ✅ Login API
     async function loginUser(email, password) {
         try {
             const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
@@ -125,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ✅ Signup API
     async function signupUser(email, username, password) {
         try {
             const response = await axios.post(`${BASE_URL}/auth/signup`, { email, username, password });
@@ -135,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ✅ Handle Login
     document.getElementById("loginSubmit").addEventListener("click", async function () {
         const email = document.getElementById("loginEmail").value.trim();
         const password = document.getElementById("loginPassword").value.trim();
@@ -150,14 +139,13 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Login successful!");
             setCookie("isUserAuth", true, 10);
             setCookie('username', response.user.username, 10);
-            authModal.style.display = "none"; // Close modal
-            checkUserSession(); // Update UI
+            authModal.style.display = "none";
+            checkUserSession();
         } catch (error) {
             alert(error.message || "Login failed.");
         }
     });
 
-    // ✅ Handle Signup
     document.getElementById("signupSubmit").addEventListener("click", async function () {
         const email = document.getElementById("signupEmail").value.trim();
         const username = document.getElementById("signupUsername").value.trim();
@@ -193,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ✅ Handle Logout
     logoutButton.addEventListener("click", function () {
         deleteCookie("isUserAuth");
         deleteCookie("username");
@@ -213,13 +200,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // ***********************************
 
     const compareSection = document.getElementById("compareSection");
+    const trending_devies_container = document.getElementById("trending_devies_container");
     
 
-    // Fetching Data
     async function fetchProductData(productName) {
         try {
             const response = await axios.get(`${BASE_URL}/product`, {
-                params: { productName } // ✅ Send as query parameter
+                params: { productName }
             });
             compareSection.style.display = "flex";
             return response.data;
@@ -230,7 +217,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayProductData(product) {
-        // Product Details Section
         const productDetails = `
             <div class="product_details">
                 <img class="product_image" src="${product.image}" alt="${product.name}" />
@@ -246,12 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
     
-        // Listings Section
         const listingsSection = `
             <div class="listings_container">
                 ${product.listings.map(listing => `
                     <div class="listing_box">
-                        <h4 class="listing_platform">${listing.platform}</h4>
+                        <p class="listing_platform"><strong>Platform:</strong> ${listing.platform}</p>
                         <p class="listing_price"><strong>Price:</strong> $${listing.price}</p>
                         <p class="listing_availability"><strong>Availability:</strong> ${listing.availability}</p>
                         <p class="listing_rating"><strong>Rating:</strong> ${listing.rating} (${listing.reviewCount} reviews)</p>
@@ -263,14 +248,60 @@ document.addEventListener("DOMContentLoaded", function () {
         // <a class="listing_box" href="${listing.link}" target="_blank">View on ${listing.platform}</a>
 
     
-        // Combine both sections
         compareSection.innerHTML = `
             ${productDetails}
             ${listingsSection}
         `;
     }
 
-    // Attach event listeners to buttons
+    searchBtn.addEventListener("click", async () => {
+        const searchTerm = searchInput.value.trim();
+    
+        if (!searchTerm) {
+            alert("Please enter a product name to search.");
+            return;
+        }
+    
+        const productData = await fetchProductData(searchTerm);
+    
+        if (productData && productData.length > 0) {
+            displayProductData(productData[0]);
+            scrollToCompareSection(); // Call the scroll function
+        } else {
+            compareSection.innerHTML = "<p>No products found matching your search.</p>";
+            compareSection.style.display = "flex";
+            scrollToCompareSection(); // Call the scroll function even if no results
+        }
+    });
+    
+    searchInput.addEventListener("keyup", async (event) => {
+        if (event.key === "Enter") {
+            const searchTerm = searchInput.value.trim();
+    
+            if (!searchTerm) {
+                alert("Please enter a product name to search.");
+                return;
+            }
+    
+            const productData = await fetchProductData(searchTerm);
+    
+            if (productData && productData.length > 0) {
+                displayProductData(productData[0]);
+                scrollToCompareSection(); // Call the scroll function
+            } else {
+                compareSection.innerHTML = "<p>No products found matching your search.</p>";
+                compareSection.style.display = "flex";
+                scrollToCompareSection(); // Call the scroll function even if no results
+            }
+        }
+    });
+    
+    function scrollToCompareSection() {
+        trending_devies_container.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
     document.getElementById("iphone14").addEventListener("click", async () => {
         const productData = await fetchProductData("iPhone 14");
         if (productData) displayProductData(productData[0]);
