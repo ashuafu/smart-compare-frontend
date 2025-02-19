@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    const BASE_URL = "https://997b-146-196-32-48.ngrok-free.app/api"; 
+    const BASE_URL = "https://smart-compare-backend.vercel.app/api"; 
     // const BASE_URL = "http://localhost:3001/api";
 
     function setCookie(name, value, days) {
