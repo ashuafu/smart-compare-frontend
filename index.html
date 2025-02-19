@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Compare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="./stuff/logo.png" alt="logo" />
+        <div class="auth_buttons">
+            <button id="loginButton">Login</button>
+            <button id="signupButton">Sign Up</button>
+            <span id="userDisplay"  style="display: none;"><img class="userImage" src="./stuff/userImage.png" alt="userImage" /><p id="userNameDisplay"></p></span>
+            <button id="logoutButton" style="display: none;">Logout</button>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container_01" >
+            <div class="C01_headings">
+                <h2 class="search_heading" >Find the Best Deals, Effortlessly</h2>
+                <p class="search_subHead" >Start your comparison journey and save time and money.</p>
+            </div>
+            <div class="search_input_con" >
+                <input class="search_input"  type="text" id="search" placeholder="Search for a product...">
+                <button class="search_button"  id="searchBtn">Search</button>
+            </div>
+            <img class="C01_bannerImage" src="./stuff/banner_bg.png" alt="banner_bg" />
+        </div>
+
+        <div class="trending_devies_container">
+            <p class="trending_heading"><img class="trending_image" src="./stuff/trending_up.png" alt="trending_image"/>Trending Devies</p>
+            <div class="trending_crousel">
+                <button class="trending_devices_name" id="iphone14">iPhone 14 Pro Max</button>
+                <button class="trending_devices_name" id="iphone15">iPhone 15 Pro Max</button>
+                <button class="trending_devices_name" id="iphone16">iPhone 16 Pro Max</button>
+                <button class="trending_devices_name" id="imacM2">iMac M2</button>
+                <button class="trending_devices_name" id="imacM4">iMac M4</button>
+                <button class="trending_devices_name" id="iPadPro">iPad Pro</button>
+                <button class="trending_devices_name" id="AppleWatchSeries10">Apple Watch Series 10</button>
+                <button class="trending_devices_name" id="AirPodsPro2ndGen">AirPods Pro 2nd Gen</button>
+                <button class="trending_devices_name" id="AirPods3rdGen">AirPods 3rd Gen</button>
+                <!-- <button class="trending_devices_name" id=""></button> -->
+            </div>
+        </div>
+        
+        <!-- Show Compare Here - Start -->
+        <div id="compareSection" style="display: none;">
+            <!-- Fetched data will be displayed here -->
+        </div>
+        <!-- Show Compare Here - End -->
+
+        <div class="container_02" >
+            <p class="C02_heading" >Why Choose Smart Compare?</p>
+            <div class="C02_innerContainer" >
+                <div class="C02_cards">
+                    <p class="C02_name" >Real Time<br>Price Updates</p>
+                    <img class="C02_images" src="./stuff/real.png" alt="real" />
+                </div>
+                <div class="C02_cards">
+                    <p class="C02_name" >Platform<br>Integrations</p>
+                    <img class="C02_images" src="./stuff/integration.png" alt="real" />
+                </div>
+                <div class="C02_cards">
+                    <p class="C02_name" >Personalized<br>Recommendations</p>
+                    <img class="C02_images" src="./stuff/personlized.png" alt="real" />
+                </div>
+                <div class="C02_cards">
+                    <p class="C02_name" >Saving<br>Tracker</p>
+                    <img class="C02_images" src="./stuff/saving.png" alt="real" />
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+    <div id="authModal" class="authModal">
+        <div class="modal_content">
+            <span class="closeModal">&times;</span>
+            
+            <h2 id="authTitle">Login</h2>
+            
+            <div id="loginForm" style="display: flex;">
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <button id="loginSubmit">Login</button>
+                <p class="extraText">Don't have an account? <span id="switchToSignup">Sign Up</span></p>
+            </div>
+    
+            <div id="signupForm" style="display: none;">
+                <input type="email" id="signupEmail" placeholder="Enter your email">
+                <input type="text" id="signupUsername" placeholder="Enter your username">
+                <input type="password" id="signupPassword" placeholder="Enter your password">
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                <button id="signupSubmit">Sign Up</button>
+                <p class="extraText">Already have an account? <span id="switchToLogin">Login</span></p>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+</html>
