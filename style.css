@@ -373,12 +373,12 @@ main{
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .listing_box{
-    border-radius: 20px;
-    padding: 30px;
+    border-radius: 12px;
+    padding: 12px;
     width: 100%;
     height: auto;
     background-color: #f7f7f7;
@@ -388,11 +388,30 @@ main{
 }
 
 
+.listing_plat_visit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d9d9d9;
+}
 
+.listing_platform{
+    font-size: 18px;
+}
 
-
-
-
+.listing_platform_cta{
+    background-color: #dfdfdf;
+    font: 500 14px 'Arial';
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: #000;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
 
 
 

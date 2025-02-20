@@ -236,16 +236,17 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="listings_container">
                 ${product.listings.map(listing => `
                     <div class="listing_box">
-                        <p class="listing_platform"><strong>Platform:</strong> ${listing.platform}</p>
-                        <p class="listing_price"><strong>Price:</strong> $${listing.price}</p>
+                        <div class="listing_plat_visit">
+                            <p class="listing_platform"><strong>${listing.platform}</strong></p>
+                            <a class="listing_platform_cta" href="${listing.link}" target="_blank">Visit</a>
+                        </div>
+                        <p class="listing_price"><strong>Price:</strong> £${listing.price}</p>
                         <p class="listing_availability"><strong>Availability:</strong> ${listing.availability}</p>
                         <p class="listing_rating"><strong>Rating:</strong> ${listing.rating} (${listing.reviewCount} reviews)</p>
                     </div>
                 `).join('')}
             </div>
         `;
-
-        // <a class="listing_box" href="${listing.link}" target="_blank">View on ${listing.platform}</a>
 
     
         compareSection.innerHTML = `
@@ -266,11 +267,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
         if (productData && productData.length > 0) {
             displayProductData(productData[0]);
-            scrollToCompareSection(); // Call the scroll function
+            scrollToCompareSection();
         } else {
             compareSection.innerHTML = "<p>No products found matching your search.</p>";
             compareSection.style.display = "flex";
-            scrollToCompareSection(); // Call the scroll function even if no results
+            scrollToCompareSection();
         }
     });
     
@@ -287,11 +288,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
             if (productData && productData.length > 0) {
                 displayProductData(productData[0]);
-                scrollToCompareSection(); // Call the scroll function
+                scrollToCompareSection();
             } else {
                 compareSection.innerHTML = "<p>No products found matching your search.</p>";
                 compareSection.style.display = "flex";
-                scrollToCompareSection(); // Call the scroll function even if no results
+                scrollToCompareSection();
             }
         }
     });
@@ -317,11 +318,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (productData) displayProductData(productData[0]);
     });
 
-    document.getElementById("imacM2").addEventListener("click", async () => {
-        const productData = await fetchProductData("iMac M2");
-        if (productData) displayProductData(productData[0]);
-    });
-
     document.getElementById("imacM4").addEventListener("click", async () => {
         const productData = await fetchProductData("iMac M4");
         if (productData) displayProductData(productData[0]);
@@ -338,8 +334,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const productData = await fetchProductData("AirPods Pro 2nd Gen");
         if (productData) displayProductData(productData[0]);
     });
-    document.getElementById("AirPods3rdGen").addEventListener("click", async () => {
-        const productData = await fetchProductData("AirPods 3rd Gen");
+    document.getElementById("AirPods4thGen").addEventListener("click", async () => {
+        const productData = await fetchProductData("AirPods 4th Gen");
         if (productData) displayProductData(productData[0]);
     });
 });
