@@ -42,12 +42,15 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkUserSession() {
         const isUserAuth = getCookie("isUserAuth");
         const username = getCookie("username");
+        const profileImage = getCookie("profileImage");
+
         if (isUserAuth) {
             loginButton.style.display = "none";
             signupButton.style.display = "none";
             userNameDisplay.innerText = `${username}`;
             userDisplay.style.display = "flex";
             logoutButton.style.display = "none";
+            document.querySelector(".userImage").src = profileImage;
         } else {
             loginButton.style.display = "inline";
             signupButton.style.display = "inline";
@@ -116,9 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    async function signupUser(email, username, password) {
+    async function signupUser(email, username, password, profileImage) {
         try {
-            const response = await axios.post(`${BASE_URL}/auth/signup`, { email, username, password });
+            const response = await axios.post(`${BASE_URL}/auth/signup`, { email, username, password, profileImage });
             return response.data;
         } catch (error) {
             throw error.response?.data || { message: "Signup request failed" };
@@ -137,8 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await loginUser(email, password);
             alert("Login successful!");
+            console.log(response);
             setCookie("isUserAuth", true, 10);
             setCookie('username', response.user.username, 10);
+            setCookie("profileImage", response.user.profileImage, 10);
             authModal.style.display = "none";
             checkUserSession();
         } catch (error) {
@@ -151,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const username = document.getElementById("signupUsername").value.trim();
         const password = document.getElementById("signupPassword").value.trim();
         const confirmPassword = document.getElementById("confirmPassword").value.trim();
+        const profileImage = document.getElementById("profileImage").files[0];
 
         if (!emailRegex.test(email)) {
             alert("Please enter a valid email address.");
@@ -172,10 +178,30 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        if (!profileImage) {
+            alert("Please upload a profile image.");
+            return;
+        }
+
         try {
-            await signupUser(email, username, password);
-            alert("Signup successful! Please log in.");
-            switchToLogin.click();
+
+            const reader = new FileReader();
+            reader.readAsDataURL(profileImage);
+            reader.onloadend = async () => {
+                const base64Image = reader.result;
+
+                console.log("object")
+                
+                await signupUser(email, username, password, base64Image);
+                console.log("2")
+                alert("Signup successful! Please log in.");
+                switchToLogin.click();
+            }
+
+            reader.onerror = () => {
+                alert("Error reading the image file.");
+            };
+            
         } catch (error) {
             alert(error.message || "Signup failed.");
         }
