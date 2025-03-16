@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function checkUserSession() {
         const isUserAuth = getCookie("isUserAuth");
         const username = getCookie("username");
-        const profileImage = getCookie("profileImage");
+        const profileImage = localStorage.getItem("profileImage");
 
         if (isUserAuth) {
             loginButton.style.display = "none";
@@ -50,7 +50,11 @@ document.addEventListener("DOMContentLoaded", function () {
             userNameDisplay.innerText = `${username}`;
             userDisplay.style.display = "flex";
             logoutButton.style.display = "none";
-            document.querySelector(".userImage").src = profileImage;
+            if (profileImage) {
+                document.querySelector(".userImage").src = profileImage;
+            } else {
+                document.querySelector(".userImage").src = "./stuff/userImage.png";
+            }
         } else {
             loginButton.style.display = "inline";
             signupButton.style.display = "inline";
@@ -140,10 +144,11 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const response = await loginUser(email, password);
             alert("Login successful!");
-            console.log(response);
             setCookie("isUserAuth", true, 10);
             setCookie('username', response.user.username, 10);
-            setCookie("profileImage", response.user.profileImage, 10);
+
+            localStorage.setItem("profileImage", response.user.profileImage);
+
             authModal.style.display = "none";
             checkUserSession();
         } catch (error) {
@@ -190,10 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
             reader.onloadend = async () => {
                 const base64Image = reader.result;
 
-                console.log("object")
-                
                 await signupUser(email, username, password, base64Image);
-                console.log("2")
                 alert("Signup successful! Please log in.");
                 switchToLogin.click();
             }
@@ -210,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     logoutButton.addEventListener("click", function () {
         deleteCookie("isUserAuth");
         deleteCookie("username");
+        localStorage.removeItem("profileImage");
         alert("You have logged out successfully.");
         checkUserSession();
     });
